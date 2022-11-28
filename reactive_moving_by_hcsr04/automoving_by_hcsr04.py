@@ -95,19 +95,37 @@ class PublisherNode(Node):
         motor_r = 0
         motor_l = 0
 
-        if 20 < self.dist < 30:
-            print("stop:")
-            p_r.stop()
-            p_l.stop()
-            p_r.start(0)
-            p_l.start(0)
-            
-        else :
+        if 40 < self.dist < 50:
             GPIO.output(ENABLE_r, GPIO.HIGH)
             GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(100)
             p_l.ChangeDutyCycle(100)
             print("go:")
+        if 30 < self.dist < 40:
+            GPIO.output(ENABLE_r, GPIO.HIGH)
+            GPIO.output(ENABLE_l, GPIO.HIGH)
+            p_r.ChangeDutyCycle(70)
+            p_l.ChangeDutyCycle(70)
+            print("go:")
+        if 20 < self.dist < 30:
+            GPIO.output(ENABLE_r, GPIO.HIGH)
+            GPIO.output(ENABLE_l, GPIO.HIGH)
+            p_r.ChangeDutyCycle(45)
+            p_l.ChangeDutyCycle(45)
+            print("go:")
+        if 10 < self.dist < 20:
+            GPIO.output(ENABLE_r, GPIO.HIGH)
+            GPIO.output(ENABLE_l, GPIO.HIGH)
+            p_r.ChangeDutyCycle(20)
+            p_l.ChangeDutyCycle(20)
+            print("go:")
+            
+        else :
+            print("stop:")
+            p_r.stop()
+            p_l.stop()
+            p_r.start(0)
+            p_l.start(0)
        
 def main(args=None):
     rclpy.init(args=args)
