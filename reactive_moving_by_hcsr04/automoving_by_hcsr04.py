@@ -33,7 +33,7 @@ class PublisherNode(Node):
 
         self.verocity = None
         self.pub = self.create_publisher(Int32MultiArray, "verocity", 10)
-        timer_period = 0.4
+        timer_period = 0.7
         self.tmr = self.create_timer(timer_period, self.hcsrToGpio2)
 
     def reading(self, sensor):
