@@ -44,10 +44,10 @@ class PublisherNode(Node):
             GPIO.setup(TRIG,GPIO.OUT)
             GPIO.setup(ECHO,GPIO.IN)
             GPIO.output(TRIG, GPIO.LOW)
-            time.sleep(0.3)
+            time.sleep(0.02)
 
             GPIO.output(TRIG, True)
-            time.sleep(0.00001)
+            time.sleep(0.001)
             GPIO.output(TRIG, False)
 
             while GPIO.input(ECHO) == 0:
