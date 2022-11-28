@@ -69,11 +69,11 @@ class PublisherNode(Node):
         self.get_logger().info('Publishing: "{0}"'.format(msg.data))
         self.pub.publish(msg)
         
-        dist = reading(0)
+        self.dist = self.reading(0)
         motor_r = 0
         motor_l = 0
 
-        if 100 < dist < 300:
+        if 100 < self.dist < 300:
             GPIO.output(ENABLE_r, GPIO.LOW)
             GPIO.output(ENABLE_l, GPIO.LOW)
             p_r.ChangeDutyCycle(100)
