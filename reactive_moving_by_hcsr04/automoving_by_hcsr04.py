@@ -73,8 +73,8 @@ class PublisherNode(Node):
         motor_l = 0
 
         if 20 < self.dist < 30:
-            GPIO.output(ENABLE_r, GPIO.LOW)
-            GPIO.output(ENABLE_l, GPIO.LOW)
+            GPIO.output(ENABLE_r, GPIO.HIGH)
+            GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(100)
             p_l.ChangeDutyCycle(100)
             print("go:")
