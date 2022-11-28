@@ -67,7 +67,7 @@ class PublisherNode(Node):
         msg = String()
         msg.data = 'distance: "{0}"'.format(self.reading(0))
         self.get_logger().info('Publishing: "{0}"'.format(msg.data))
-        
+        print(self.reading(0))        
         self.dist = self.reading(0)
         motor_r = 0
         motor_l = 0
