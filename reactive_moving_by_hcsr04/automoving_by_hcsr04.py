@@ -102,19 +102,22 @@ class PublisherNode(Node):
             p_r.ChangeDutyCycle(100)
             p_l.ChangeDutyCycle(100)
             print("go:")
-        if 30 < self.dist < 40:
+            
+        elif 30 < self.dist < 40:
             GPIO.output(ENABLE_r, GPIO.HIGH)
             GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(70)
             p_l.ChangeDutyCycle(70)
             print("go:")
-        if 20 < self.dist < 30:
+            
+        elif 20 < self.dist < 30:
             GPIO.output(ENABLE_r, GPIO.HIGH)
             GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(45)
             p_l.ChangeDutyCycle(45)
             print("go:")
-        if 10 < self.dist < 20:
+            
+        elif 10 < self.dist < 20:
             GPIO.output(ENABLE_r, GPIO.HIGH)
             GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(20)
