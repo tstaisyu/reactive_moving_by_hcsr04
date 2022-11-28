@@ -33,7 +33,7 @@ class PublisherNode(Node):
 
         self.verocity = None
         self.pub = self.create_publisher(Int32MultiArray, "verocity", 10)
-        timer_period = 0.2
+        timer_period = 0.1
         self.tmr = self.create_timer(timer_period, self.hcsrToGpio)
 
     def reading(self, sensor):
@@ -44,7 +44,6 @@ class PublisherNode(Node):
             GPIO.setup(TRIG,GPIO.OUT)
             GPIO.setup(ECHO,GPIO.IN)
             GPIO.output(TRIG, GPIO.LOW)
-            time.sleep(0.3)
 
             GPIO.output(TRIG, True)
             time.sleep(0.00001)
@@ -67,7 +66,7 @@ class PublisherNode(Node):
         msg = String()
         msg.data = 'distance: "{0}"'.format(self.reading(0))
         self.get_logger().info('Publishing: "{0}"'.format(msg.data))
-        print(self.reading(0))        
+
         self.dist = self.reading(0)
         motor_r = 0
         motor_l = 0
