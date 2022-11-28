@@ -20,6 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'automoving_by_hcsr04= reactive_moving_by_hcsr04.automoving_by_hcsr04:main',
+
         ],
     },
 )
