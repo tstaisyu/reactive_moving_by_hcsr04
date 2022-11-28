@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 import RPi.GPIO as GPIO
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Int32MultiArray, String
 import serial
 import time
 
