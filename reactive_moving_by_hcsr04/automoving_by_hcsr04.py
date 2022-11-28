@@ -34,7 +34,7 @@ class PublisherNode(Node):
         self.verocity = None
         self.pub = self.create_publisher(Int32MultiArray, "verocity", 10)
         timer_period = 0.4
-        self.tmr = self.create_timer(timer_period, self.hcsrToGpio)
+        self.tmr = self.create_timer(timer_period, self.hcsrToGpio2)
 
     def reading(self, sensor):
         TRIG = 22
@@ -63,7 +63,7 @@ class PublisherNode(Node):
         else:
             print ("Incorrect usonic() function varible.")    
 
-    def hcsrToGpio(self):
+    def hcsrToGpio1(self):
         msg = String()
         msg.data = 'distance: "{0}"'.format(self.reading(0))
         self.get_logger().info('Publishing: "{0}"'.format(msg.data))
@@ -85,6 +85,29 @@ class PublisherNode(Node):
             p_l.stop()
             p_r.start(0)
             p_l.start(0)
+
+    def hcsrToGpio2(self):
+        msg = String()
+        msg.data = 'distance: "{0}"'.format(self.reading(0))
+        self.get_logger().info('Publishing: "{0}"'.format(msg.data))
+
+        self.dist = self.reading(0)
+        motor_r = 0
+        motor_l = 0
+
+        if 20 < self.dist < 30:
+            print("stop:")
+            p_r.stop()
+            p_l.stop()
+            p_r.start(0)
+            p_l.start(0)
+            
+        else :
+            GPIO.output(ENABLE_r, GPIO.LOW)
+            GPIO.output(ENABLE_l, GPIO.LOW)
+            p_r.ChangeDutyCycle(100)
+            p_l.ChangeDutyCycle(100)
+            print("go:")
        
 def main(args=None):
     rclpy.init(args=args)
