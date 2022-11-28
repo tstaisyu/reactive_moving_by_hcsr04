@@ -19,12 +19,6 @@ GPIO.setup(ENABLE_l, GPIO.OUT)
 GPIO.output(ENABLE_r, GPIO.LOW)
 GPIO.output(ENABLE_l, GPIO.LOW)
 
-TRIG = 22
-ECHO = 23
-GPIO.setup(TRIG,GPIO.OUT)
-GPIO.setup(ECHO,GPIO.IN)
-GPIO.output(TRIG, GPIO.LOW)
-
 p_r = GPIO.PWM(R, bottom)
 p_l = GPIO.PWM(L, bottom)
 
@@ -43,7 +37,15 @@ class PublisherNode(Node):
         self.tmr = self.create_timer(timer_period, self.hcsrToGpio)
 
     def reading(self, sensor):
+        TRIG = 22
+        ECHO = 23
+        
         if sensor == 0:
+            GPIO.setup(TRIG,GPIO.OUT)
+            GPIO.setup(ECHO,GPIO.IN)
+            GPIO.output(TRIG, GPIO.LOW)
+            time.sleep(0.3)
+
             GPIO.output(TRIG, True)
             time.sleep(0.00001)
             GPIO.output(TRIG, False)
@@ -85,51 +87,6 @@ class PublisherNode(Node):
             p_r.start(0)
             p_l.start(0)
        
-
-    def toGpio(self, msg): 
-        self.joy_r = msg.data[0]
-        self.joy_l = msg.data[1]
-        motor_r = self.joy_r
-        motor_l = self.joy_l
-        time.sleep(0.1)
-
-        if motor_l > 10 and motor_r > 10:
-            GPIO.output(ENABLE_r, GPIO.LOW)
-            GPIO.output(ENABLE_l, GPIO.LOW)
-            p_r.ChangeDutyCycle(motor_l)
-            p_l.ChangeDutyCycle(motor_r)
-            print("go:", motor_l, motor_r)
-            
-        elif motor_l > 10 and motor_r < -10:
-            GPIO.output(ENABLE_r, GPIO.HIGH)
-            GPIO.output(ENABLE_l, GPIO.LOW)
-            p_r.ChangeDutyCycle(motor_l)
-            p_l.ChangeDutyCycle(-(motor_r))
-            print("turn right:", motor_l, motor_r)
-            
-        elif motor_l < -10 and motor_r > 10:
-            GPIO.output(ENABLE_r, GPIO.LOW)
-            GPIO.output(ENABLE_l, GPIO.HIGH)
-            p_r.ChangeDutyCycle(-(motor_l))
-            p_l.ChangeDutyCycle(motor_r)
-            print("turn left:", motor_l, motor_r)
-            
-        elif motor_l < -10 and motor_r < -10:
-            GPIO.output(ENABLE_r, GPIO.HIGH)
-            GPIO.output(ENABLE_l, GPIO.HIGH)
-            p_r.ChangeDutyCycle(-(motor_l))
-            p_l.ChangeDutyCycle(-(motor_r))
-            print("back:", motor_l, motor_r)
-            
-        else:
-            print("stop:", motor_l, motor_r)
-            p_r.stop()
-            p_l.stop()
-            p_r.start(0)
-            p_l.start(0)
-
-
-
 def main(args=None):
     rclpy.init(args=args)
     node = PublisherNode()
