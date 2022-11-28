@@ -31,7 +31,7 @@ p_l = GPIO.PWM(L, bottom)
 p_r.start(0)
 p_l.start(0)
 
-class publisherNode(Node):
+class PublisherNode(Node):
     def __init__(self):
         super().__init__("automoving_by_hcsr04")
         self.joy_r = 0
@@ -132,7 +132,7 @@ class publisherNode(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SubscriberNode()
+    node = PublisherNode()
     rclpy.spin(node)
     node.destroy_node()
     GPIO.cleanup()
