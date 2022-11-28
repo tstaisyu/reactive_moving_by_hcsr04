@@ -103,8 +103,8 @@ class PublisherNode(Node):
             p_l.start(0)
             
         else :
-            GPIO.output(ENABLE_r, GPIO.LOW)
-            GPIO.output(ENABLE_l, GPIO.LOW)
+            GPIO.output(ENABLE_r, GPIO.HIGH)
+            GPIO.output(ENABLE_l, GPIO.HIGH)
             p_r.ChangeDutyCycle(100)
             p_l.ChangeDutyCycle(100)
             print("go:")
