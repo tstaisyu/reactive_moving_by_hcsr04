@@ -94,6 +94,7 @@ class PublisherNode(Node):
         self.dist = self.reading(0)
         motor_r = 0
         motor_l = 0
+        time.sleep(0.1)
 
         if 40 < self.dist < 50:
             GPIO.output(ENABLE_r, GPIO.HIGH)
